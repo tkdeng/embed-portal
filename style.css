@@ -26,6 +26,16 @@ embed-portal {
     border-radius: 0;
   }
 
+  &:not([content-loaded]):not([content-error]) {
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 10000;
+      background: light-dark(#dfdfdf, #1f1f1f);
+    }
+  }
+
   error-msg {
     align-self: center;
     text-align: center;

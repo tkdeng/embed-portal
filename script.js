@@ -3,12 +3,15 @@
 ;(function() {
 
   function loop(){
-    document.querySelectorAll('embed-portal:not([content-loaded])').forEach(function(embed){
-      if(embed.hasAttribute('content-loaded')){return;}
-      embed.setAttribute('content-loaded', '');
+    document.querySelectorAll('embed-portal:not([content-loaded]):not([content-loading]):not([content-error])').forEach(function(embed){
+      if(embed.hasAttribute('content-loaded') || embed.hasAttribute('content-loading') || embed.hasAttribute('content-error')){return;}
+      embed.setAttribute('content-loading', '');
 
       const src = embed.getAttribute('src');
       if(!src.startsWith('/') || src.startsWith(window.location.origin)){
+        embed.setAttribute('content-error', '');
+        embed.removeAttribute('content-loading');
+        
         const err = new Error('Embed Portal only supports same-origin requests.');
 
         src = src.replace(/[^\x20-\x7E]/g, '');
@@ -80,6 +83,9 @@
 
         // trigger onload event
         setTimeout(function(){
+          embed.setAttribute('content-loaded', '');
+          embed.removeAttribute('content-loading');
+
           const loadEvent = new CustomEvent('load', {
             detail: {
               root: shadow,
@@ -98,6 +104,9 @@
           }
         }, 100);
       }).catch(err => {
+        embed.setAttribute('content-error', '');
+        embed.removeAttribute('content-loading');
+
         src = src.replace(/[^\x20-\x7E]/g, '');
         console.error("Failed to fetch HTML page '"+src+"':", err);
         const errElm = document.createElement('error-msg');
