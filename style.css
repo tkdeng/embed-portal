@@ -1,0 +1,35 @@
+embed-portal {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  /* border: solid 2px var(--text); */
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(var(--shadow), var(--shadow), var(--shadow), 0.25);
+  box-sizing: border-box;
+  margin: 10px 20px;
+  padding: 0;
+  width: calc(100% - 40px);
+  /* height: 50vh; */
+  /* aspect-ratio: 16 / 9; */
+  aspect-ratio: 1.618 / 1;
+
+  @media (max-width: 1023px) {
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+
+  @media (max-width: 799px) {
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  error-msg {
+    align-self: center;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+  }
+}
