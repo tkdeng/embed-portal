@@ -7,7 +7,7 @@
       if(embed.hasAttribute('content-loaded') || embed.hasAttribute('content-loading') || embed.hasAttribute('content-error')){return;}
       embed.setAttribute('content-loading', '');
 
-      const src = embed.getAttribute('src');
+      let src = embed.getAttribute('src');
       if(!src.startsWith('/') || src.startsWith(window.location.origin)){
         embed.setAttribute('content-error', '');
         embed.removeAttribute('content-loading');
