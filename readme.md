@@ -46,6 +46,12 @@ portal.addEventListener('load', (event) => {
 portal.addEventListener('error', (event) => {
   console.error('Failed to load portal:', event.detail.message);
 });
+
+// Global listener
+document.addEventListener('load-embed-portal', (event) => {
+  const shadowRoot = event.detail.root;
+  const target = event.detail.target; // portal element
+});
 ```
 
 ## Attributes

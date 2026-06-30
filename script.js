@@ -88,12 +88,22 @@
 
           const loadEvent = new CustomEvent('load', {
             detail: {
+              target: embed,
               root: shadow,
             },
             bubbles: false,
             cancelable: false,
           });
           embed.dispatchEvent(loadEvent);
+
+          document.dispatchEvent(new CustomEvent('load-embed-portal', {
+            detail: {
+              target: embed,
+              root: shadow,
+            },
+            bubbles: false,
+            cancelable: false,
+          }));
   
           if(embed.hasAttribute('onload')){
             try {
